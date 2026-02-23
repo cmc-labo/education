@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 215 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    --primary: 200 80% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 200 30% 94%;
+    --secondary-foreground: 215 25% 25%;
+
+    --muted: 210 25% 95%;
+    --muted-foreground: 215 15% 50%;
+
+    --accent: 35 90% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 200 80% 55%;
+
+    --radius: 0.75rem;
+
+    --chat-ai: 200 30% 94%;
+    --chat-ai-foreground: 215 25% 20%;
+    --chat-user: 200 80% 55%;
+    --chat-user-foreground: 0 0% 100%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(200, 80%, 55%), hsl(210, 85%, 45%));
+    --gradient-accent: linear-gradient(135deg, hsl(35, 90%, 60%), hsl(25, 85%, 55%));
+    --gradient-surface: linear-gradient(180deg, hsl(210, 40%, 98%), hsl(210, 30%, 96%));
+
+    --shadow-soft: 0 2px 12px -2px hsl(200 80% 55% / 0.12);
+    --shadow-card: 0 4px 20px -4px hsl(215 25% 15% / 0.08);
+    --shadow-elevated: 0 8px 30px -6px hsl(215 25% 15% / 0.12);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 215 25% 10%;
+    --foreground: 210 30% 95%;
+    --card: 215 25% 13%;
+    --card-foreground: 210 30% 95%;
+    --popover: 215 25% 13%;
+    --popover-foreground: 210 30% 95%;
+    --primary: 200 80% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 20% 18%;
+    --secondary-foreground: 210 30% 90%;
+    --muted: 215 20% 18%;
+    --muted-foreground: 215 15% 60%;
+    --accent: 35 90% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 215 20% 20%;
+    --input: 215 20% 20%;
+    --ring: 200 80% 55%;
+    --chat-ai: 215 20% 18%;
+    --chat-ai-foreground: 210 30% 90%;
+    --chat-user: 200 80% 55%;
+    --chat-user-foreground: 0 0% 100%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Noto Sans JP', 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+}
