@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ThumbsUp, ThumbsDown, Bot, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 interface SolutionTabsProps {
   isLoading: boolean;
@@ -247,9 +249,17 @@ const SolutionTabs = ({ isLoading, answer, error }: SolutionTabsProps) => {
   );
 };
 
+function normalizeMath(content: string): string {
+  return content
+    .replace(/\\\[([\s\S]*?)\\\]/g, (_: string, math: string) => `$$${math}$$`)
+    .replace(/\\\(([\s\S]*?)\\\)/g, (_: string, math: string) => `$${math}$`);
+}
+
 const MarkdownContent = ({ content }: { content: string }) => (
   <div className="text-sm leading-relaxed [&>p]:mb-2 [&>p:last-child]:mb-0 [&>ul]:list-disc [&>ul]:pl-4 [&>ol]:list-decimal [&>ol]:pl-4 [&>li]:mb-1 [&>pre]:bg-muted [&>pre]:rounded-lg [&>pre]:p-3 [&>pre]:overflow-x-auto [&_code]:bg-muted [&_code]:rounded [&_code]:px-1 [&>h1]:text-base [&>h1]:font-bold [&>h2]:text-sm [&>h2]:font-bold [&>h3]:text-sm [&>h3]:font-semibold">
-    <ReactMarkdown>{content}</ReactMarkdown>
+    <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+      {normalizeMath(content)}
+    </ReactMarkdown>
   </div>
 );
 

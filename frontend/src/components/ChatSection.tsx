@@ -4,6 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChatBubble } from "./SolutionTabs";
 import { sendChatMessage } from "@/lib/dify";
 import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+
+function normalizeMath(content: string): string {
+  return content
+    .replace(/\\\[([\s\S]*?)\\\]/g, (_: string, math: string) => `$$${math}$$`)
+    .replace(/\\\(([\s\S]*?)\\\)/g, (_: string, math: string) => `$${math}$`);
+}
 
 interface Message {
   role: "user" | "ai";
@@ -73,7 +81,9 @@ const ChatSection = ({ conversationId }: ChatSectionProps) => {
               <ChatBubble role={msg.role === "ai" ? "ai" : "user"}>
                 {msg.role === "ai" ? (
                   <div className="text-sm leading-relaxed [&>p]:mb-1 [&>p:last-child]:mb-0">
-                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+                      {normalizeMath(msg.content)}
+                    </ReactMarkdown>
                   </div>
                 ) : (
                   <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
